@@ -1,0 +1,227 @@
+@import "tw-animate-css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Geist";
+  src: url("https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-sans/Geist-Variable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --background: 0 0% 98%;
+    --foreground: 220 15% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 10%;
+    --primary: 220 50% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 15% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 15% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 50% 28%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 15% 10%;
+    --sidebar-primary: 220 50% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 15% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 220 50% 28%;
+  }
+
+  .dark {
+    --background: 220 15% 6%;
+    --foreground: 40 30% 94%;
+    --card: 220 15% 9%;
+    --card-foreground: 40 30% 94%;
+    --popover: 220 15% 9%;
+    --popover-foreground: 40 30% 94%;
+    --primary: 215 45% 55%;
+    --primary-foreground: 220 15% 6%;
+    --secondary: 220 15% 14%;
+    --secondary-foreground: 40 30% 94%;
+    --muted: 220 15% 14%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 220 15% 14%;
+    --accent-foreground: 40 30% 94%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 215 45% 55%;
+    --sidebar-background: 220 15% 6%;
+    --sidebar-foreground: 40 30% 94%;
+    --sidebar-primary: 215 45% 55%;
+    --sidebar-primary-foreground: 220 15% 6%;
+    --sidebar-accent: 220 15% 14%;
+    --sidebar-accent-foreground: 40 30% 94%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 215 45% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Micro-interactions & 2025-2026 Trend Updates */
+
+/* Star rating */
+.star-filled {
+  color: #f59e0b;
+}
+
+.star-empty {
+  color: hsl(var(--border));
+}
+
+/* Button micro-interactions */
+.btn-interactive {
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+.btn-interactive:hover {
+  transform: translateY(-1px);
+}
+.btn-interactive:active {
+  transform: scale(0.97);
+}
+
+/* Cart badge bounce animation */
+@keyframes cartBounce {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.35); }
+  60% { transform: scale(0.9); }
+}
+.cart-badge-bounce {
+  animation: cartBounce 0.4s ease;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, hsl(var(--secondary)) 25%, hsl(var(--muted)) 50%, hsl(var(--secondary)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Trust badge pulse */
+@keyframes trustPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.trust-pulse {
+  animation: trustPulse 2s ease-in-out infinite;
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Card hover lift (Bento Grid trend) */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -12px hsl(var(--foreground) / 0.1);
+}
+
+/* Stripe Elements */
+.StripeElement {
+  padding: 12px 16px;
+  border: 1px solid hsl(var(--input));
+  border-radius: 0.5rem;
+  background: hsl(var(--card));
+}
+
+.StripeElement--focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+}
